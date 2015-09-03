@@ -1,0 +1,9 @@
+function a=shujun(I)
+L=graythresh(I);%get the self-adapting threshold
+G=im2bw(I,0.07);%image binaryzation with special threshold
+W1=G;
+W2=bwmorph(W1,'majority',5);%mathematical morphology operations
+W3=medfilt2(W2,[6,6]);%filtering
+W4=bwareaopen(W3,40);%delete small area to reduce error noises
+[labeled,num]=bwlabel(W4,4);%counting number of objects
+a=num;
